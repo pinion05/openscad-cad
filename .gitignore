@@ -1,0 +1,12 @@
+# 생성 산출물 (build.sh / make_step.py로 재생성) — 렌더 PNG는 커밋함
+stl/
+step/
+build_warnings.log
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# macOS
+.DS_Store
