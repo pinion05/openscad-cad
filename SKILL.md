@@ -1,9 +1,12 @@
 ---
 name: openscad-cad
+version: 0.1.0
 description: OpenSCAD CLI로 파라메트릭 3D 부품/조립 모델을 설계·빌드·검증하는 워크플로. 부품별 .scad 분리, STL/STEP 익스포트, 매니폴드·부품 간 간섭 자동 검증(manifold3d 불리언), 헤드리스 PNG 렌더링 포함. 이 머신(macOS)에서 검증된 OpenSCAD 경로·Python venv 구성과, 실전에서 직접 밟은 함정(use/include, center=true, -D 한계 등)의 해법이 내장되어 있다. 트리거 — OpenSCAD, 파라메트릭 CAD, 3D 프린팅 부품 모델링/설계, STL/STEP 뽑기, 조립형 모델, 부품 간섭/간섭 검사, 매니폴드/watertight 검증, RC카·프레임·케이지 같은 출력물 설계, "CAD 스크립트로 만들어줘".
 ---
 
 # OpenSCAD CLI 파라메트릭 CAD
+
+버전 0.1.0 (프론트매터 `version` 필드와 항상 일치시킬 것)
 
 ## 언제 이 스킬을 쓰나
 
