@@ -42,8 +42,8 @@ project/
 ├── assembly.scad      use <parts/...> 로 조립 + color 배치
 ├── stl/  render/  step/
 └── scripts/
-    ├── build.sh       STL+PNG 일괄 생성 (이 스킬 scripts/build.sh을 복사해 PARTS만 편집)
-    ├── validate.py    매니폴드+간섭 검증 (scripts/validate.py을 복사해 INSTANCES만 편집)
+    ├── build.sh       STL+PNG 일괄 생성 (이 스킬 `scripts/build.sh`을 복사해 PARTS만 편집)
+    ├── validate.py    매니폴드+간섭 검증 (`scripts/validate.py`을 복사해 INSTANCES만 편집)
     └── make_step.py   조립 STL → STEP
 ```
 
