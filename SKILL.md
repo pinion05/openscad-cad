@@ -1,6 +1,6 @@
 ---
 name: openscad-cad
-version: 0.1.0
+version: 0.1.1
 description: OpenSCAD CLI로 파라메트릭 3D 부품/조립 모델을 설계·빌드·검증하는 워크플로. 부품별 .scad 분리, STL/STEP 익스포트, 매니폴드·부품 간 간섭 자동 검증(manifold3d 불리언), 헤드리스 PNG 렌더링 포함. 이 머신(macOS)에서 검증된 OpenSCAD 경로·Python venv 구성과, 실전에서 직접 밟은 함정(use/include, center=true, -D 한계 등)의 해법이 내장되어 있다. 트리거 — OpenSCAD, 파라메트릭 CAD, 3D 프린팅 부품 모델링/설계, STL/STEP 뽑기, 조립형 모델, 부품 간섭/간섭 검사, 매니폴드/watertight 검증, RC카·프레임·케이지 같은 출력물 설계, "CAD 스크립트로 만들어줘".
 ---
 
@@ -143,9 +143,17 @@ OCP API 노트: 정적 메서드는 `_s` 접미사(`RWStl.ReadFile_s`), 삼각�
 5. `-D` 오버라이드는 include/use 체인을 못 넘는다 → 전역 해상도는 루트 `$fn` 하나로.
 6. 파라미터는 앞/뒤 명명으로 길이 항상 양수화.
 7. 빌드 로그에서 stderr를 버리지 않는다("unknown variable" 경고 = 실버그).
+8. 미러 루프 안 X축 실린더는 `rotate([0, s*90, 0])`, 좌표는 `mir(p,s)`(함정 10).
+   좌측 부품 누락은 validate가 못 잡는다 — 대칭성 프로브로 확인.
+9. 절단 큐브는 대상 두께 전체 관통(center=true + slab 중심 + 양측 돌출).
+10. `offset(r)`은 도형을 r만큼 바깥으로 팽창 — 인접 간격 계산에 반영.
+11. `rotate([90,0,0])`은 +Z→−Y. +Y 확장은 `[-90,0,0]`(함정 13).
 
 ## 검증된 전체 예제
 
 `example/rc_buggy/` (깃허브 레포 참조): 1:10 RC 오프로드 버기 — 12부품,
 매니폴드 전부 통과 + 간섭 0mm³. params/lib/parts/assembly/scripts 전체가
 이 스킬의 템플릿 그대로다. 새 프로젝트는 이 구조를 복사해 시작하는 게 빠르다.
+`example/real_buggy/`: 1:1 실차 스케일 버기(전장 3,400mm·35인치 타이어) — 같은
+템플릿으로 6라운드 검증 끝에 간섭 0mm³. 미러링/컷 큐브/offset 함정(10~12)의
+실제 사례 수치와 `scripts/diagnose.py`(간섭 연결 성분 분해)가 들어 있다.

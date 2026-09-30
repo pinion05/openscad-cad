@@ -1,6 +1,6 @@
 # openscad-cad — CLI 파라메트릭 CAD 스킬 + 검증 예제
 
-![version](https://img.shields.io/badge/version-0.1.0-blue) ![skill](https://img.shields.io/badge/OpenSCAD-CLI_CAD-orange)
+![version](https://img.shields.io/badge/version-0.1.1-blue) ![skill](https://img.shields.io/badge/OpenSCAD-CLI_CAD-orange)
 
 OpenSCAD CLI로 3D 프린팅용 **조립형 파라메트릭 모델**을 설계·빌드·검증하는
 재사용 가능한 ZCode 에이전트 스킬과, 이 스킬로 실제 만든 전체 예제 프로젝트를
@@ -18,7 +18,8 @@ openscad-cad/
 │   ├── build.sh              부품/조립 STL + PNG 일괄 생성
 │   ├── validate.py           매니폴드 + 부품 간 간섭(정확한 불리언 교집합) 검증
 │   └── make_step.py          조립 STL → STEP 변환 (OCP)
-└── example/rc_buggy/         ← 검증된 전체 예제: 1:10 RC 오프로드 버기
+├── example/rc_buggy/         ← 검증된 전체 예제: 1:10 RC 오프로드 버기
+└── example/real_buggy/        ← 검증된 전체 예제: 1:1 리얼 스케일 버기(함정 10~13 실사례)
     ├── params.scad           모든 치수의 유일한 수정 지점
     ├── lib.scad              공용 프리미티브 (rod/orient/plate/coil/shock)
     ├── parts/                부품 12종 (각각 단독 익스포트 가능)
