@@ -65,3 +65,10 @@ cp -r openscad-cad ~/.agents/skills/openscad-cad
 
 - macOS + OpenSCAD(앱 번들 내 CLI), Homebrew Python 3.12 venv
 - Python: numpy, trimesh, manifold3d, scipy, networkx, rtree, cadquery(OCP)
+
+## 버전/릴리스 정책 (자동)
+
+- **단일 소스**: `SKILL.md` 프론트매터의 `version` 필드 하나만 고친다.
+- CI([version-sync](.github/workflows/version.yml))가 push마다:
+  1. `SKILL.md` = `CHANGELOG.md` 최상위 버전 = README 배지 일관성 검사 (불일치 시 실패)
+  2. 버전 태그(`vX.Y.Z`)가 없으면 태그 + GitHub Release를 CHANGELOG 해당 섹션 본문으로 자동 생성
