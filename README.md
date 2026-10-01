@@ -1,6 +1,6 @@
 # openscad-cad — CLI 파라메트릭 CAD 스킬 + 검증 예제
 
-![version](https://img.shields.io/badge/version-0.1.1-blue) ![skill](https://img.shields.io/badge/OpenSCAD-CLI_CAD-orange)
+![version](https://img.shields.io/badge/version-0.1.2-blue) ![skill](https://img.shields.io/badge/OpenSCAD-CLI_CAD-orange)
 
 OpenSCAD CLI로 3D 프린팅용 **조립형 파라메트릭 모델**을 설계·빌드·검증하는
 재사용 가능한 ZCode 에이전트 스킬과, 이 스킬로 실제 만든 전체 예제 프로젝트를

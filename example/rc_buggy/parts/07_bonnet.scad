@@ -9,6 +9,9 @@ module part_bonnet() {
         translate([0, 150, 74]) cube([68, 4, 8],  center = true);  // 미드
         translate([0, 168, 62]) cube([60, 4, 8],  center = true);  // 노즈 팁
     }
+    // 마운트 탭 6개 — 섀시 상면(z0)과 0.4mm 시트 (대시·호스·라디에이터 회피 위치)
+    for (s = [-1, 1], m = [[30, 66, 83], [28, 108, 75], [25, 160, 60]])
+        rod([s*m[0], m[1], z0 + 3.4], [s*m[0], m[1], m[2]], 6);
 }
 
 part_bonnet();
