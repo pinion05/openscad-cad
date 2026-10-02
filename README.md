@@ -1,6 +1,6 @@
 # openscad-cad — CLI 파라메트릭 CAD 스킬 + 검증 예제
 
-![version](https://img.shields.io/badge/version-0.1.3-blue) ![skill](https://img.shields.io/badge/OpenSCAD-CLI_CAD-orange)
+![version](https://img.shields.io/badge/version-0.1.4-blue) ![skill](https://img.shields.io/badge/OpenSCAD-CLI_CAD-orange)
 
 OpenSCAD CLI로 3D 프린팅용 **조립형 파라메트릭 모델**을 설계·빌드·검증하는
 재사용 가능한 ZCode 에이전트 스킬과, 이 스킬로 실제 만든 전체 예제 프로젝트를
@@ -13,7 +13,7 @@ OpenSCAD CLI로 3D 프린팅용 **조립형 파라메트릭 모델**을 설계·
 ```
 openscad-cad/
 ├── SKILL.md                  ← 에이전트 스킬 본체 (이것만 봐도 워크플로 사용 가능)
-├── references/pitfalls.md    ← 실전 함정 카탈로그 9종 (사고→원인→진단→해결)
+├── references/pitfalls.md    ← 실전 함정 카탈로그 20종 (사고→원인→진단→해결)
 ├── scripts/                  ← 바로 복사해 쓰는 범용 템플릿
 │   ├── build.sh              부품/조립 STL + PNG 일괄 생성
 │   ├── validate.py           매니폴드 + 부품 간 간섭(정확한 불리언 교집합) 검증
