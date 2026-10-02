@@ -1,6 +1,6 @@
 # openscad-cad — CLI 파라메트릭 CAD 스킬 + 검증 예제
 
-![version](https://img.shields.io/badge/version-0.1.4-blue) ![skill](https://img.shields.io/badge/OpenSCAD-CLI_CAD-orange)
+![version](https://img.shields.io/badge/version-0.1.5-blue) ![skill](https://img.shields.io/badge/OpenSCAD-CLI_CAD-orange)
 
 OpenSCAD CLI로 3D 프린팅용 **조립형 파라메트릭 모델**을 설계·빌드·검증하는
 재사용 가능한 ZCode 에이전트 스킬과, 이 스킬로 실제 만든 전체 예제 프로젝트를
@@ -13,19 +13,27 @@ OpenSCAD CLI로 3D 프린팅용 **조립형 파라메트릭 모델**을 설계·
 ```
 openscad-cad/
 ├── SKILL.md                  ← 에이전트 스킬 본체 (이것만 봐도 워크플로 사용 가능)
-├── references/pitfalls.md    ← 실전 함정 카탈로그 20종 (사고→원인→진단→해결)
+├── references/pitfalls.md    ← 실전 함정 카탈로그 22종 (사고→원인→진단→해결)
 ├── scripts/                  ← 바로 복사해 쓰는 범용 템플릿
 │   ├── build.sh              부품/조립 STL + PNG 일괄 생성
 │   ├── validate.py           매니폴드 + 부품 간 간섭(정확한 불리언 교집합) 검증
 │   └── make_step.py          조립 STL → STEP 변환 (OCP)
 ├── example/rc_buggy/         ← 검증된 전체 예제: 1:10 RC 오프로드 버기
-└── example/real_buggy/        ← 검증된 전체 예제: 1:1 리얼 스케일 버기(함정 10~13 실사례)
-    ├── params.scad           모든 치수의 유일한 수정 지점
-    ├── lib.scad              공용 프리미티브 (rod/orient/plate/coil/shock)
-    ├── parts/                부품 12종 (각각 단독 익스포트 가능)
+├── example/real_buggy/       ← 검증된 전체 예제: 1:1 리얼 스케일 버기(함정 10~13 실사례)
+│   ├── params.scad           모든 치수의 유일한 수정 지점
+│   ├── lib.scad              공용 프리미티브 (rod/orient/plate/coil/shock)
+│   ├── parts/                부품 12종 (각각 단독 익스포트 가능)
+│   ├── assembly.scad         전체 조립 + 컬러
+│   ├── render/               4방향 조립 + 부품별 렌더링 PNG
+│   └── README.md             제원/BOM(14부품)/조립 안내
+└── example/f1_car_v2/        ← 검증된 전체 예제: 1:10 F1 그랜드파이언스 카 30부품
+    ├── params.scad           1:10 실차 비례 전체 치수 (휠베이스 360·타이어 Ø72)
+    ├── lib.scad              라운디드 사각 loft·NACA polyhedron 윙 로프트·캡슐
+    ├── parts/                부품 30종 (타이어/림 분리, 스쿱·카메라·디퓨저 등)
     ├── assembly.scad         전체 조립 + 컬러
-    ├── render/               4방향 조립 + 부품별 렌더링 PNG
-    └── README.md             제원/BOM(14부품)/조립 안내
+    ├── scripts/              build/validate/diagnose/clean_stl
+    ├── render/               4방향 조립 + 부품 30종 PNG
+    └── README.md             제원/BOM/검증 로그 (함정 21~22 실사례)
 ```
 
 ## 예제 프로젝트 검증 결과

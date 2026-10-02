@@ -1,12 +1,12 @@
 ---
 name: openscad-cad
-version: 0.1.4
+version: 0.1.5
 description: OpenSCAD CLI로 파라메트릭 3D 부품/조립 모델을 설계·빌드·검증하는 워크플로. 부품별 .scad 분리, STL/STEP 익스포트, 매니폴드·부품 간 간섭 자동 검증(manifold3d 불리언), 헤드리스 PNG 렌더링 포함. 이 머신(macOS)에서 검증된 OpenSCAD 경로·Python venv 구성과, 실전에서 직접 밟은 함정(use/include, center=true, -D 한계 등)의 해법이 내장되어 있다. 트리거 — OpenSCAD, 파라메트릭 CAD, 3D 프린팅 부품 모델링/설계, STL/STEP 뽑기, 조립형 모델, 부품 간섭/간섭 검사, 매니폴드/watertight 검증, RC카·프레임·케이지 같은 출력물 설계, "CAD 스크립트로 만들어줘".
 ---
 
 # OpenSCAD CLI 파라메트릭 CAD
 
-버전 0.1.4 (프론트매터 `version` 필드와 항상 일치시킬 것)
+버전 0.1.5 (프론트매터 `version` 필드와 항상 일치시킬 것)
 저장소: https://github.com/pinion05/openscad-cad
 
 ## 버전 체크 — 매 실행 무조건 (0단계보다 먼저)
@@ -179,7 +179,7 @@ OCP API 노트: 정적 메서드는 `_s` 접미사(`RWStl.ReadFile_s`), 삼각�
 3. 캡슐 끝단은 od/2 초과 뻗음 → 부품 경계 클리어런스는 반지름만큼 가산.
 4. orient() 회전 순서 → 외부 Z, 내부 Y 순서만 정답.
 5. `-D` 오버라이드는 include/use 체인을 못 넘는다 → 전역 해상도는 루트 `$fn` 하나로.
-6. 파라미터는 앞/뒤 명명으로 길이 항상 양수화.
+6. 파라미터는 앞/뒤 명명으로 길이 항상 양수화. hull 코너 헬퍼는 r < min(dx,dy)/2 검증(함정 6).
 7. 빌드 로그에서 stderr를 버리지 않는다("unknown variable" 경고 = 실버그).
 8. 미러 루프 안 X축 실린더는 `rotate([0, s*90, 0])`, 좌표는 `mir(p,s)`(함정 10).
    좌측 누락은 검증 5계층(대칭성 프로브)이 자동으로 잡는다.
@@ -197,7 +197,15 @@ OCP API 노트: 정적 메서드는 `_s` 접미사(`RWStl.ReadFile_s`), 삼각�
 17. 미러 루프의 큐브 폭 음수 = 빈 도형 — 좌측 요소가 조용히 소실, 대칭
     프로브만 잡는다(함정 19).
 18. loft 단면은 얇은 슬래브로 — 실린더/구 섹션은 Z로 r 축소·Y로 ±r 팽창.
-    공유 접합면의 이중 슬래브는 전방 전용 오프셋으로(함정 20).
+    공유 접합면의 이중 슬래브는 전방 전용 오프셋으로, 접합 안전은 hull 스팬
+    전체의 부호로 확인(함정 20).
+19. hull 체인 loft는 캠버진/오목한 단면을 볼록 껍질로 채워 요소가 처진다 —
+    윙류는 polyhedron 스트립 로프트로. 미러 슬라이스 확장은 x 오름차순 체인으로,
+    2D y 성분 누락시 단면적 0 블레이드가 watertight까지 통과(부피로만 잡힘,
+    함정 21).
+20. 손작 polyhedron: 미러본은 권선이 뒤집혀 부피 음수(volume()>0 검사가 포착),
+    collinear 캡 팬은 0면적 삼각형으로 watertight 깨뜨림 — 후처리 클리너로
+    정규화하되 **watertight인 파일은 건드리지 않는다**를 가드로(함정 22).
 
 ## 검증된 전체 예제
 
@@ -208,3 +216,8 @@ params/lib/parts/assembly/scripts 전체가 이 스킬의 템플릿 그대로다
 `example/real_buggy/`: 1:1 실차 스케일 버기(전장 3,400mm·35인치 타이어) — 같은
 템플릿으로 6라운드 검증 끝에 간섭 0mm³. 미러링/컷 큐브/offset 함정(10~12)의
 실제 사례 수치와 `scripts/diagnose.py`(간섭 연결 성분 분해)가 들어 있다.
+`example/f1_car_v2/`: 1:10 F1 그랜드파이언스 카 — **30부품·접촉 39쌍·34인스턴스
+단일 조립체** 검증 통과. 타이어 회전체($fn=288)·NACA polyhedron 로프트 윙·
+라운디드 사각 loft 바디의 고해상도 참고 구현이며, 함정 21~22(hull 볼록 껍질
+팽창, polyhedron 권선/퇴화면 + STL 클리너)의 실사례와 `scripts/clean_stl.py`가
+들어 있다.
