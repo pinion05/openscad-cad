@@ -1,6 +1,6 @@
 # openscad-cad — CLI 파라메트릭 CAD 스킬 + 검증 예제
 
-![version](https://img.shields.io/badge/version-0.1.2-blue) ![skill](https://img.shields.io/badge/OpenSCAD-CLI_CAD-orange)
+![version](https://img.shields.io/badge/version-0.1.3-blue) ![skill](https://img.shields.io/badge/OpenSCAD-CLI_CAD-orange)
 
 OpenSCAD CLI로 3D 프린팅용 **조립형 파라메트릭 모델**을 설계·빌드·검증하는
 재사용 가능한 ZCode 에이전트 스킬과, 이 스킬로 실제 만든 전체 예제 프로젝트를
@@ -70,6 +70,8 @@ cp -r openscad-cad ~/.agents/skills/openscad-cad
 ## 버전/릴리스 정책 (자동)
 
 - **단일 소스**: `SKILL.md` 프론트매터의 `version` 필드 하나만 고친다.
+- 설치된 스킬은 매 실행 시 원격 버전을 자동 체크하고 최신이면 자가 갱신한다
+  (SKILL.md "버전 체크" 절).
 - CI([version-sync](.github/workflows/version.yml))가 push마다:
   1. `SKILL.md` = `CHANGELOG.md` 최상위 버전 = README 배지 일관성 검사 (불일치 시 실패)
   2. 버전 태그(`vX.Y.Z`)가 없으면 태그 + GitHub Release를 CHANGELOG 해당 섹션 본문으로 자동 생성
